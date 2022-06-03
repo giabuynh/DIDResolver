@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "keccak256": "^1.0.6",
+    "method-override": "^3.0.0",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   }

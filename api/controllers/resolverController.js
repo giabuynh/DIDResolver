@@ -65,7 +65,7 @@ exports.getDIDDocument = async function (req, res) {
 };
 
 exports.checkWrappedDocumentExistence = async function (req, res) {
-  const { fileName, companyName } = req.body;
+  const { fileName, companyName } = req.body; //heaer
   console.log(req.body);
   if (!fileName || !companyName)
     return res.status(400).send("Missing parameters.");
@@ -135,6 +135,7 @@ exports.createWrappedDocument = async function (req, res) {
         },
       }
     );
+    // Get from dApp: encoded address
     // if (address !== issuerAddress)
     //     return res.status(401).send("Unauthorized");
 
