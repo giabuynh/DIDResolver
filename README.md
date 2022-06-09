@@ -13,8 +13,8 @@ npm run server
 ```
 Result:
 ```
-DID Resolver RESTfull API server start on: 9000
+DID Resolver RESTfull API server start on: 8000
 ```
 
 ## API
-http://localhost:9000/api-docs/
+http://localhost:8000/api-docs/
