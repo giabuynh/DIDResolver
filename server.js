@@ -9,9 +9,6 @@ const http = require("http"),
   swaggerDocument = require("./swagger/"),
   port = process.env.PORT || 8000;
 
-const swaggerUi = require("swagger-ui-express"),
-  swaggerDocument = require("./swagger/");
-
 const app = express();
 
 // routes
