@@ -1,7 +1,10 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 const Ajv = require("ajv");
 const axios = require("axios").default;
 const { parseCookies, ensureAuthenticated, getAddressFromHexEncoded } = require("../../core/index");
+=======
+>>>>>>> bce7091 (refactor swagger)
 =======
 >>>>>>> bce7091 (refactor swagger)
 const DID_CONTROLLER = "http://localhost:9000";

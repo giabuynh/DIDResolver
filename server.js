@@ -6,14 +6,20 @@ const http = require("http"),
   cookieParser = require('cookie-parser'),
   methodOverride = require("method-override"),
 <<<<<<< HEAD
+<<<<<<< HEAD
   swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger/"),
   port = process.env.PORT || 8000;
 =======
+=======
+>>>>>>> bce7091 (refactor swagger)
   port = process.env.PORT || 8000;
 
 const swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger/");
+<<<<<<< HEAD
+>>>>>>> bce7091 (refactor swagger)
+=======
 >>>>>>> bce7091 (refactor swagger)
 
 const app = express();
