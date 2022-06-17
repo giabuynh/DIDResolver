@@ -1,13 +1,12 @@
 const Ajv = require("ajv");
 const axios = require("axios").default;
-const { getAddressFromHexEncoded } = require("../../core/index");
 const DID_CONTROLLER = "http://localhost:9000";
 const CARDANO_SERVICE = "http://192.168.1.23:10000";
 // const CARDANO_SERVICE = "http://localhost:10000";
 const AUTHENTICATION_SERVICE = "http://18.139.84.180:12000";
 // const AUTHENTICATION_SERVICE = "http://localhost:12000";
 
-const { getAddressFromHexEncoded, errorResponse } = require("../../core/index");
+const { getAddressFromHexEncoded } = require("../../core/index");
 
 /**
  * POST to create DID Doc for a DID
@@ -105,13 +104,6 @@ exports.checkWrappedDocumentExistence = async function (req, res) {
     );
 };
 
-exports.checkWrappedDocumentValidity = async function (req, res) {
-  const { wrappedDocument } = req.headers;
-  if (!wrappedDocument) return res.status(400).send("Missing parameters.");
-
-  return res.status(200).send("Wrapped document is valid.");
-}
-
 /**
  * POST to creat wrapped document
  * @param {Object} wrappedDocument JSON object wrapped document, including did, hash and address.
@@ -119,6 +111,7 @@ exports.checkWrappedDocumentValidity = async function (req, res) {
  * @returns {Object} message
  */
 exports.createWrappedDocument = async function (req, res) {
+  console.log(req);
   // Get access-token from request
   const access_token = req.cookies['access_token'];
 
