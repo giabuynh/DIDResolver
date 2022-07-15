@@ -1,81 +1,76 @@
-const SCHEMAS = require("./schemas");
-const EXAMPLES = require("./examples");
-// const { wrappedDocumentSchema } = require("./schemas/wrappedDocument.js");
+const schemas = require("./schemas");
+const examples = require("./examples");
 
 module.exports.schemas = {
-  errorMessageDIDController: {
-    type: "object",
-    properties: {
-      errorCode: {
-        type: "integer",
-        summary: "Error Code.",
-      },
-      message: {
-        type: "string",
-        summary: "Error message from DIDController.",
-      }
-    }
-  },
-  didDocument: {
-    type: "object",
-    properties: {
-      name: {
-        type: "string",
-        description: "Name of DID document, usually is DID string.",
-        example: "did:method:giabuynh:srs"
-      },
-      content: {
-        type: "object",
-        properties: {
-
-        },
-        description: "Example content in JSON format.",
-        example: {
-          date: "10-10-2000"
-        }
-      }
-    }
-  },
-  didDocumentOfWrappedDocument: {
-    ...SCHEMAS.didDocumentOfWrappedDocument
-  },
-  // didDocumentOfWrappedDocument: {
-  //   type: "object",
-  //   properties: {
-  //     controller: {
-  //       type: "string",
-  //       description: "",
-  //       example: ""
-  //     },
-  //     did: {
-  //       type: "string",
-  //       description: "",
-  //       example: ""
-  //     },
-  //     docController: {
-  //       type: "string",
-  //       description: "",
-  //       example: ""
-  //     },
-  //     url: {
-  //       type: "string",
-  //       description: "",
-  //       example: ""
-  //     }
-  //   }
-  // },
-  wrappedDocument: {
-    ...SCHEMAS.wrappedDocument
-  }
-}
+  ...schemas,
+};
 
 module.exports.examples = {
-  didDocumentContent: {
-    controller: "someonePublicKey",
-    id: "did:method:giabynh:srs",
-    date: "10-10-2000"
+  ...examples,
+};
+
+// module.exports.securitySchemes = {
+//   cookieAuth: {
+//     type: "apiKey",
+//     in: "cookie",
+//     name: "access_token"
+//   }
+// }
+
+module.exports.responses = {
+  BadRequest: {
+    content: {
+      "application/json": {
+        schema: {
+          $ref: "#/components/schemas/error",
+        },
+        examples: {
+          "Missing parameters": {
+            $ref: "#/components/examples/errorMissingParameters",
+          },
+          "Invalid input": { $ref: "#/components/examples/errorInvalidInput" },
+        },
+      },
+    },
   },
-  wrappedDocument: {
-    ...EXAMPLES.wrappedDocument
-  }
-}
+  Unauthorized: {
+    description: "Cannot verify user with the given access token.",
+    content: {
+      "text/plain": {
+        schema: {
+          type: "string",
+          example: "Unauthorized.",
+        },
+      },
+    },
+  },
+  NotFound_DIDDocument: {
+    description: "DID document or/and wrapped document are not found.",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            error_code: { type: "integer" },
+            error_message: { type: "string" },
+          },
+        },
+        examples: {
+          "No file": {
+            value: {
+              error_code: 10004,
+              error_message:
+                "File/Public Key with the given value cannot be found.",
+            },
+          },
+          "No branch": {
+            value: {
+              error_code: 10003,
+              error_message: "Company with the given name cannot be found.",
+            },
+          },
+        },
+      },
+    },
+  },
+};
