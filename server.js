@@ -3,11 +3,20 @@ const http = require("http"),
   cors = require("cors"),
   bodyParser = require("body-parser"),
   compression = require("compression"),
+<<<<<<< HEAD
   cookieParser = require("cookie-parser"),
   methodOverride = require("method-override"),
   swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger/"),
   port = process.env.PORT || 8000;
+=======
+  cookieParser = require('cookie-parser'),
+  methodOverride = require("method-override"),
+  port = process.env.PORT || 8000;
+
+const swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("./swagger/");
+>>>>>>> bce7091 (refactor swagger)
 
 const app = express();
 
