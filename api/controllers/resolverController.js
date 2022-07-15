@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 const Ajv = require("ajv");
 const axios = require("axios").default;
 const { parseCookies, ensureAuthenticated, getAddressFromHexEncoded } = require("../../core/index");
+=======
+>>>>>>> bce7091 (refactor swagger)
 const DID_CONTROLLER = "http://localhost:9000";
-const CARDANO_SERVICE = "http://192.168.1.23:10000";
-// const CARDANO_SERVICE = "http://localhost:10000";
+// const CARDANO_SERVICE = "http://192.168.1.23:10000";
+const CARDANO_SERVICE = "http://localhost:10000";
 // const AUTHENTICATION_SERVICE = "http://18.139.84.180:12000";
 const AUTHENTICATION_SERVICE = "http://localhost:12000";
+
+const axios = require("axios").default;
+const { getAddressFromHexEncoded, errorResponse } = require("../../core/index");
 
 /**
  * POST to create DID Doc for a DID
@@ -15,7 +21,8 @@ const AUTHENTICATION_SERVICE = "http://localhost:12000";
  */
 exports.createDIDDocument = async function (req, res) {
   const { did, didDocument } = req.body;
-  if (!did || !didDocument) return res.status(400).send("Missing parameters.");
+  if (!did || !didDocument)
+    return errorResponse(400, "Missing parrameters");
 
   const didComponents = did.split(":");
   if (didComponents.length < 4 || didComponents[0] != "did")
@@ -177,7 +184,7 @@ exports.createWrappedDocument = async function (req, res) {
     // console.log(mintingNFT) policyId
     if (!mintingNFTStatus) return res.status(400).send("Cannot store hash.");
     const mintingNFTStatus = (mintingNFT.data.data.result) ? mintingNFT.data.data.result : false;
-    const policyId = mintingNFTStatus ? mintingNFT.data.data.policyId : "No policyId";
+    const policyId = mintingNFTStatus ? mintingNFT.data.data.token.policyId : "No policyId";
 
 
     // 4. Storing wrapped document on DB

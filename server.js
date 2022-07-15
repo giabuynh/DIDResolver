@@ -5,9 +5,16 @@ const http = require("http"),
   compression = require("compression"),
   cookieParser = require('cookie-parser'),
   methodOverride = require("method-override"),
+<<<<<<< HEAD
   swaggerUi = require("swagger-ui-express"),
   swaggerDocument = require("./swagger/"),
   port = process.env.PORT || 8000;
+=======
+  port = process.env.PORT || 8000;
+
+const swaggerUi = require("swagger-ui-express"),
+  swaggerDocument = require("./swagger/");
+>>>>>>> bce7091 (refactor swagger)
 
 const app = express();
 
@@ -40,6 +47,7 @@ app.use((err, res) => {
     error_data: err.error_data,
   });
 });
+
 server.listen(port, () => {
   console.log(`Listening on http://localhost:${port}`);
 });
