@@ -8,14 +8,14 @@ const {
 
 module.exports = {
   ensureAuthenticated: (req, res, next) => {
-    console.log(req.cookies)
     if (!req.cookies["access_token"]) {
       Logger.apiError(req, res, `Not found: access_token.`);
       return res.status(200).json(ERRORS.UNAUTHORIZED);
     }
 
+    console.log(1);
+
     const token = req.cookies["access_token"];
-    console.log('Token', token)
     // Call Auth Service
     // success:
     //   { data: { address: string } }
@@ -38,6 +38,13 @@ module.exports = {
           next();
         },
         (error) => {
+          console.log(2, error);
+          if (
+            error.response?.data === "Unauthorized" &&
+            error.response?.status === 401
+          ) {
+            return res.status(401).json({ msg: 'No token, authorization denied' });
+          }
           Logger.apiError(req, res, `${JSON.stringify(error)}`);
           next(error);
         }
@@ -61,10 +68,11 @@ module.exports = {
   },
 
   verifyToken: async (req, res) => {
+    console.log(1);
     if (!req.cookies["access_token"])
       return res.status(401).json(ERRORS.UNAUTHORIZED);
     const token = req.cookies["access_token"];
-
+    console.log(2);
     try {
       const { data } = await axios.get(
         `${SERVERS.AUTHENTICATION_SERVICE}/api/auth/verify`,
@@ -75,6 +83,7 @@ module.exports = {
           },
         }
       );
+      console.log(3, data);
 
       Logger.apiInfo(req, res, `Success.\n${JSON.stringify(data)}`);
       return res.status(200).json({

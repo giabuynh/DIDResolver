@@ -599,14 +599,6 @@ module.exports = {
         }
       );
 
-      Logger.info(
-        `request: ${JSON.stringify(request)}\naccess_token: ${access_token}`
-      );
-
-      data?.code
-        ? Logger.apiError(req, res, `${JSON.stringify(data)}`)
-        : Logger.apiInfo(req, res, `Success.\n${JSON.stringify(data)}`);
-
       return res.status(200).json(data);
     } catch (error) {
       console.log(4);

@@ -135,12 +135,12 @@ module.exports = {
       // Call Cardano Service
       // success:
       //   {
-      //     code: number,
+      //     code: 0,
       //     message: string,
       //     data: true/false
       //   }
       // error:
-      //   { code: number, message: string }
+      //   { code: 1, message: string }
       const { data } = await axios.post(
         SERVERS.CARDANO_SERVICE + "/api/v2/verify/signature",
         {
