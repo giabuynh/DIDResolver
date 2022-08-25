@@ -8,8 +8,6 @@ module.exports.SERVERS = {
   AUTHENTICATION_SERVICE: process.env.AUTHENTICATION_SERVICE,
 };
 
-Logger.info(this.SERVERS.AUTHENTICATION_SERVICE);
-
 module.exports.SCHEMAS = SCHEMAS;
 
 module.exports.ERRORS = {

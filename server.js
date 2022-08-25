@@ -8,15 +8,6 @@ const http = require("http"),
   port = process.env.PORT || 8000;
 
 const app = express();
-const corsOptions = {
-  origin: [
-    "http://18.139.84.180:11000",
-    "https://paperless-fuixlabs.ap.ngrok.io",
-    "http://192.168.2.2:4000",
-  ],
-  credentials: true,
-};
-app.use(cors(corsOptions));
 // app.use((req, res, next) => {
 //   res.header(
 //     "Access-Control-Expose-Headers",
@@ -29,7 +20,17 @@ app.use(cors(corsOptions));
 //     "Access-Control-Allow-Headers",
 //     "Origin, X-Requested-With, Content-Type, Accept"
 //   );
+//   next();
 // });
+const corsOptions = {
+  origin: [
+    "http://18.139.84.180:11000",
+    "https://paperless-fuixlabs.ap.ngrok.io",
+    "http://192.168.2.2:4000",
+  ],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.json());
